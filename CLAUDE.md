@@ -9,7 +9,7 @@ A one-page static site listing gear from Aaron's Quint Guitars Reverb shop (http
 - `template.html`: layout and CSS. Contains the placeholders `{{NAV}}`, `{{SECTIONS}}`, `{{INTRO}}`, `{{MAX_PHOTOS}}` and `{{COUNT}}`. It starts with a real document head (`<!doctype>`, charset, viewport, description), which the page needs now that it's hosted on its own rather than as an artifact. (`{{TOTAL}}` is still filled by build.py but the template no longer uses it.)
 - `photos.json`: `{photo_key: "data:image/jpeg;base64,..."}`. Listing photos are JPEGs at 520px max and quality 0.72. The four `max-*` keys are photos of Max for the header, at 540×720 and quality 72. The originals were `~/Downloads/IMG_{4503,5162,6686,3846 2} Large.jpeg`.
 - `max_photos` in `items.yaml` lists the header photos of Max (`photo` key and `alt` text) in display order. They render as a staggered 2×2 grid in a 480px column beside the intro on screens 820px and wider, as a row of four below the intro between 560 and 819px, and as a 2×2 grid below 560px.
-- `intro` in `items.yaml` is the paragraph under the page title. It's plain text and gets HTML-escaped.
+- `intro` in `items.yaml` is the text under the page title, written by Aaron as a YAML folded block (`>`). A blank line starts a new `<p>`. Text is HTML-escaped, then Markdown-style `[text](url)` becomes a link (`mailto:` links open in the same tab, web links in a new one). It links Instagram (@quirkey) and aaron@quirkey.com because Aaron prefers direct sales (Venmo or PayPal) to avoid Reverb fees.
 - **Strip metadata from any personal photo before embedding.** Aaron's iPhone photos carry GPS coordinates for his home. Re-encode them with Pillow (in `.venv`), which drops EXIF, as was done for the Max photos.
 - `img/`: empty and unused.
 

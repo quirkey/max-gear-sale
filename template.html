@@ -54,7 +54,11 @@ a:focus-visible { outline: 2px solid var(--led); outline-offset: 3px; border-rad
 .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 10px; margin: 0; }
 .led { width: 10px; height: 10px; border-radius: 50%; background: var(--led); box-shadow: 0 0 0 3px var(--led-glow), 0 0 12px var(--led-glow); flex: none; }
 h1 { font-family: var(--display); font-weight: 800; font-size: clamp(2.4rem, 7vw, 4.4rem); line-height: .98; letter-spacing: -.02em; margin: 0; text-wrap: balance; max-width: 14ch; }
-.lede { font-size: 1.15rem; max-width: 58ch; margin: 0; }
+.lede { font-size: 1.08rem; max-width: 60ch; display: grid; gap: .8em; }
+.lede p { margin: 0; }
+.lede p:first-child { font-size: 1.15rem; }
+.lede a { text-decoration-color: var(--led); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.lede a:hover { color: var(--led); }
 .stats { font-family: var(--mono); font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 4px 0 0; padding: 0; list-style: none; font-variant-numeric: tabular-nums; }
 .stats strong { color: var(--ink); font-weight: 500; }
 .stats a { text-underline-offset: 3px; }
@@ -96,9 +100,9 @@ footer p { margin: 0; max-width: 60ch; }
 
 <header class="wrap top">
   <div class="intro">
-  <p class="eyebrow"><span class="led" aria-hidden="true"></span>Fundraiser · Quint Guitars</p>
+  <p class="eyebrow"><span class="led" aria-hidden="true"></span>Selling gear to get Max in the clear</p>
   <h1>Max's Surgery Gear Sale</h1>
-  <p class="lede">{{INTRO}}</p>
+  <div class="lede">{{INTRO}}</div>
   <ul class="stats">
     <li><strong>{{COUNT}}</strong> items</li>
     <li>Ships from Kingston, NY</li>
@@ -117,5 +121,5 @@ footer p { margin: 0; max-width: 60ch; }
 </main>
 
 <footer class="wrap">
-  <p>Checkout, shipping and buyer protection are handled through Reverb. Prices match the current Reverb listings.</p>
+  <p>&copy; 2026 Aaron Quint</p>
 </footer>

@@ -1,4 +1,4 @@
-import json, html, os, sys
+import json, html, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 os.chdir(HERE)
@@ -58,6 +58,15 @@ data = load_data()
 sections = data['sections']
 
 e = html.escape
+
+def linkify(text):
+    # Escape plain text, then turn Markdown-style [text](url) into links.
+    # mailto: links open in the same tab; web links open in a new one.
+    def a(m):
+        label, url = m.group(1), m.group(2)
+        ext = '' if url.startswith('mailto:') else ' target="_blank" rel="noopener"'
+        return f'<a href="{url}"{ext}>{label}</a>'
+    return re.sub(r'\[([^\]]+)\]\(([^)\s]+)\)', a, e(text))
 total = sum(i['price'] for s in sections for i in s['items'])
 count = sum(len(s['items']) for s in sections)
 
@@ -92,6 +101,6 @@ secs = ''.join(f'''
 max_photos = ''.join(f'<img src="{photos[p["photo"]]}" alt="{e(p["alt"])}" width="540" height="720">' for p in data.get('max_photos') or [])
 
 tpl = open('template.html').read()
-out = tpl.replace('{{NAV}}', nav).replace('{{SECTIONS}}', secs).replace('{{MAX_PHOTOS}}', max_photos).replace('{{INTRO}}', e(data['intro'].strip())).replace('{{COUNT}}', str(count)).replace('{{TOTAL}}', f'{total:,}')
+out = tpl.replace('{{NAV}}', nav).replace('{{SECTIONS}}', secs).replace('{{MAX_PHOTOS}}', max_photos).replace('{{INTRO}}', ''.join(f'<p>{linkify(p.strip())}</p>' for p in data['intro'].strip().split('\n') if p.strip())).replace('{{COUNT}}', str(count)).replace('{{TOTAL}}', f'{total:,}')
 open('index.html', 'w').write(out)
 print(len(out), count, total)

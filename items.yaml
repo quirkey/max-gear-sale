@@ -13,8 +13,33 @@
 #
 # Items appear in the order listed. Keep text in quotes.
 
-# The paragraph under the page title. Plain text; keep it in quotes.
-intro: "My cat Max needs surgery, so I'm selling guitars and pedals I've built over the years. Every purchase goes toward his vet bill. Thank you for helping out."
+# The text under the page title. A blank line starts a new paragraph. For a link,
+# write [link text](https://example.com), or [me@example.com](mailto:me@example.com) for email.
+intro: >
+  A few years ago, Max came into our lives and quickly became
+  an important member of our family. At > 25 lbs, and a purr
+  louder than a jet engine, he has many names: Pooshkin, Plumpy,
+  Big Boy.
+
+  This summer, a small cut appeared on his foot and strangely did
+  not heal. After seeing multiple vets, the diagnosis was an aggressive
+  form of cancer and the only treatment is to amputate his whole leg.
+
+  Of course, this is extremely expensive. With my current financial
+  situation I don't feel right asking for donations, as there are much
+  more deserving people and causes. However, can I interest you in some
+  music gear? Some of these items I've built myself, some I'm just reselling
+  but I figure I can feed two birds with one scone here and raise a few
+  dollars to offset the cost of this surgery and clean out some of the things
+  in my studio.
+
+  I'd love to avoid the fees of Reverb, so if you're interested in anything,
+  DM me on Instagram ([@quirkey](https://instagram.com/quirkey)) or email me at
+  [aaron@quirkey.com](mailto:aaron@quirkey.com) and we can
+  arrange payment through Venmo or paypal.
+
+  If you're local to Kingston, I'm happy to set up pickup or delivery, too!
+
 
 # Photos of Max in the page header, in display order. "photo" is a key in
 # photos.json; "alt" describes the photo for screen readers.

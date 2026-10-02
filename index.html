@@ -54,7 +54,11 @@ a:focus-visible { outline: 2px solid var(--led); outline-offset: 3px; border-rad
 .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 10px; margin: 0; }
 .led { width: 10px; height: 10px; border-radius: 50%; background: var(--led); box-shadow: 0 0 0 3px var(--led-glow), 0 0 12px var(--led-glow); flex: none; }
 h1 { font-family: var(--display); font-weight: 800; font-size: clamp(2.4rem, 7vw, 4.4rem); line-height: .98; letter-spacing: -.02em; margin: 0; text-wrap: balance; max-width: 14ch; }
-.lede { font-size: 1.15rem; max-width: 58ch; margin: 0; }
+.lede { font-size: 1.08rem; max-width: 60ch; display: grid; gap: .8em; }
+.lede p { margin: 0; }
+.lede p:first-child { font-size: 1.15rem; }
+.lede a { text-decoration-color: var(--led); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.lede a:hover { color: var(--led); }
 .stats { font-family: var(--mono); font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 4px 0 0; padding: 0; list-style: none; font-variant-numeric: tabular-nums; }
 .stats strong { color: var(--ink); font-weight: 500; }
 .stats a { text-underline-offset: 3px; }
@@ -96,9 +100,9 @@ footer p { margin: 0; max-width: 60ch; }
 
 <header class="wrap top">
   <div class="intro">
-  <p class="eyebrow"><span class="led" aria-hidden="true"></span>Fundraiser · Quint Guitars</p>
+  <p class="eyebrow"><span class="led" aria-hidden="true"></span>Selling gear to get Max in the clear</p>
   <h1>Max's Surgery Gear Sale</h1>
-  <p class="lede">My cat Max needs surgery, so I&#x27;m selling guitars and pedals I&#x27;ve built over the years. Every purchase goes toward his vet bill. Thank you for helping out.</p>
+  <div class="lede"><p>A few years ago, Max came into our lives and quickly became an important member of our family. At &gt; 25 lbs, and a purr louder than a jet engine, he has many names: Pooshkin, Plumpy, Big Boy.</p><p>This summer, a small cut appeared on his foot and strangely did not heal. After seeing multiple vets, the diagnosis was an aggressive form of cancer and the only treatment is to amputate his whole leg.</p><p>Of course, this is extremely expensive. With my current financial situation I don&#x27;t feel right asking for donations, as there are much more deserving people and causes. However, can I interest you in some music gear? Some of these items I&#x27;ve built myself, some I&#x27;m just reselling but I figure I can feed two birds with one scone here and raise a few dollars to offset the cost of this surgery and clean out some of the things in my studio.</p><p>I&#x27;d love to avoid the fees of Reverb, so if you&#x27;re interested in anything, DM me on Instagram (<a href="https://instagram.com/quirkey" target="_blank" rel="noopener">@quirkey</a>) or email me at <a href="mailto:aaron@quirkey.com">aaron@quirkey.com</a> and we can arrange payment through Venmo or paypal.</p><p>If you&#x27;re local to Kingston, I&#x27;m happy to set up pickup or delivery, too!</p></div>
   <ul class="stats">
     <li><strong>11</strong> items</li>
     <li>Ships from Kingston, NY</li>
@@ -263,5 +267,5 @@ footer p { margin: 0; max-width: 60ch; }
 </main>
 
 <footer class="wrap">
-  <p>Checkout, shipping and buyer protection are handled through Reverb. Prices match the current Reverb listings.</p>
+  <p>&copy; 2026 Aaron Quint</p>
 </footer>
