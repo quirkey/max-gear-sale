@@ -1,0 +1,112 @@
+# Listings for Max's Surgery Gear Sale.
+# Edit this file, then run:  python3 build.py
+#
+# Each item:
+#   name:        card title
+#   price:       whole dollars, no $ sign
+#   photo:       key in photos.json (add new photos there)
+#   tags:        effect-type chips shown on the card
+#   description: one line under the title
+#   reverb:      listing slug; the link is https://reverb.com/item/<slug>
+#   original:    true shows the "Original design" badge (optional)
+#   condition:   kept for reference; not shown on the page (optional)
+#
+# Items appear in the order listed. Keep text in quotes.
+
+sections:
+  - id: guitars
+    title: "Guitars"
+    blurb: "Partscasters I assembled, finished and set up in the shop."
+    items:
+      - name: "Esquire #04, Daphne Blue"
+        price: 900
+        photo: esquire
+        tags: ["Solid body"]
+        description: "The first Quint partscaster I put up for sale, built with premium parts and a full setup."
+        reverb: 81891009-quint-guitars-esquire-04-2023-daphne-blue
+        condition: "Brand New"
+
+      - name: "Jazzcaster #07, Fiesta Red"
+        price: 825
+        photo: jazzcaster
+        tags: ["Solid body"]
+        description: "A hand-finished partscaster with premium parts and a full setup."
+        reverb: 91230133-quint-guitars-07-jazzcaster-fiesta-red
+        condition: "Brand New"
+
+  - id: pedals
+    title: "Pedals"
+    blurb: "One original design plus Clone Lab builds: part-for-part clones on PedalPCB boards with through-hole parts."
+    items:
+      - name: "Drive Trem"
+        price: 175
+        original: true
+        photo: drivetrem
+        tags: ["Overdrive", "Tremolo"]
+        description: "My own design: a JFET overdrive and a tremolo in one enclosure."
+        reverb: 97549430-quint-guitars-drive-trem-2026-black-woodgrain
+        condition: "Brand New"
+
+      - name: "Data Corrupter"
+        price: 175
+        photo: datacorrupter
+        tags: ["Fuzz", "Noise"]
+        description: "Clone of the EQD Data Corrupter, a PLL square-wave fuzz that tracks into synth chaos."
+        reverb: 99865222-quint-guitars-clone-lab-data-corrupter
+        condition: "Excellent"
+
+      - name: "Riptide"
+        price: 175
+        photo: riptide
+        tags: ["Reverb"]
+        description: "Clone of the Scientific Guitarist Riptide, with a real Accutronics spring tank inside."
+        reverb: 99863494-quint-guitars-clone-lab-riptide
+        condition: "Excellent"
+
+      - name: "Organizer"
+        price: 120
+        photo: organizer
+        tags: ["Pitch", "Vibrato"]
+        description: "Clone of the EQD Organizer, an FV-1 organ emulator with pitch-shifted voices."
+        reverb: 99862807-quint-guitars-clone-lab-organizer
+        condition: "Excellent"
+
+      - name: "Warlow"
+        price: 120
+        photo: warlow
+        tags: ["Distortion", "Fuzz"]
+        description: "Clone of the JPTR FX Warlow: an op-amp Big Muff with extra gain and a 3-way tone switch."
+        reverb: 99862711-quint-guitars-clone-lab-warlow
+        condition: "Excellent"
+
+      - name: "Fuzz Bender"
+        price: 100
+        photo: fuzzbender
+        tags: ["Fuzz", "Boost"]
+        description: "Clone of the Keeley Fuzz Bender, a Tone Bender circuit mixing silicon and germanium."
+        reverb: 99862890-quint-guitars-clone-lab-fuzz-bender
+        condition: "Excellent"
+
+      - name: "Prince of Tone"
+        price: 90
+        photo: prince
+        tags: ["Overdrive"]
+        description: "Clone of the Analogman Prince of Tone, with a 3-way gain switch in a compact 1590B."
+        reverb: 99868106-quint-guitars-clone-lab-prince-of-tone
+        condition: "Excellent"
+
+      - name: "Breakup"
+        price: 90
+        photo: breakup
+        tags: ["Overdrive", "Preamp"]
+        description: "Clone of the Danelectro Breakdown, with a smooth pot in place of the rotary switch."
+        reverb: 94491814-quint-guitars-clone-lab-breakup
+        condition: "Excellent"
+
+      - name: "Levitation"
+        price: 90
+        photo: levitation
+        tags: ["Reverb", "Delay"]
+        description: "Clone of the EQD Levitation, an ambient reverb built on the Belton brick."
+        reverb: 99862655-quint-guitars-clone-lab-levitation
+        condition: "Very Good"

@@ -4,7 +4,8 @@ A one-page static site listing gear from Aaron's Quint Guitars Reverb shop (http
 
 ## Files
 - `index.html`: generated output and the deliverable. It's self-contained, with photos embedded as base64 data URIs (~400KB). Don't hand-edit it; edit the sources and rebuild.
-- `build.py`: the generator. All listing data lives in the `sections` list at the top. Each item is `(photo_key, name, price, condition, tags, one_line_desc, reverb_slug[, True])`. A trailing `True` marks an original design and shows the "Original design" badge. The link URL is `https://reverb.com/item/<slug>`.
+- `items.yaml`: all listing data, meant for Aaron to edit by hand. Sections (`id`, `title`, `blurb`, `items`) and items (`name`, `price`, `photo`, `tags`, `description`, `reverb`, plus optional `original: true` for the "Original design" badge and `condition`). The header comment documents the fields. The link URL is `https://reverb.com/item/<reverb>`. Strings are quoted because names like "Esquire #04" would otherwise be cut off at `#` as a YAML comment.
+- `build.py`: the generator. It reads `items.yaml`, validates it (missing or unknown fields, a photo key not in `photos.json`, a non-numeric price) and writes `index.html`. PyYAML lives in a gitignored `.venv`. If `yaml` can't be imported, build.py re-runs itself under `.venv/bin/python`, so plain `python3 build.py` works. To recreate the venv: `python3 -m venv .venv && .venv/bin/pip install pyyaml`.
 - `template.html`: layout and CSS. Contains the placeholders `{{NAV}}`, `{{SECTIONS}}` and `{{COUNT}}`. (`{{TOTAL}}` is still filled by build.py but the template no longer uses it.)
 - `photos.json`: `{photo_key: "data:image/jpeg;base64,..."}`, JPEGs at 520px max and quality 0.72.
 - `img/`: empty and unused.
@@ -13,7 +14,7 @@ A one-page static site listing gear from Aaron's Quint Guitars Reverb shop (http
     python3 build.py   # writes index.html, prints size / item count / total $
 
 ## Deploy
-GitHub Pages from the `main` branch root of https://github.com/quirkey/max-gear-sale. Live at https://quirkey.github.io/max-gear-sale/. To update: `python3 build.py`, commit, `git push`. Pages rebuilds in about a minute.
+GitHub Pages from the `main` branch root of https://github.com/quirkey/max-gear-sale. Live at https://quirkey.github.io/max-gear-sale/. To update: edit `items.yaml`, `python3 build.py`, commit, `git push`. Pages rebuilds in about a minute.
 
 ## Content decisions (from Aaron)
 - Categories: Guitars, Pedals. (The Pedal-building tools section, 3 drill templates, was removed on 2026-10-02 at Aaron's request; their photos are still in `photos.json` but unused.) Each card has a photo, name, price, a one-line description, effect-type tags and a link.
