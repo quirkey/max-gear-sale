@@ -13,6 +13,18 @@
 #
 # Items appear in the order listed. Keep text in quotes.
 
+# Photos of Max in the page header, in display order. "photo" is a key in
+# photos.json; "alt" describes the photo for screen readers.
+max_photos:
+  - photo: max-bed
+    alt: "Max, a black-and-white tuxedo cat, lying on a bed with his white paws crossed"
+  - photo: max-garden
+    alt: "Max sitting on a garden path, looking unimpressed"
+  - photo: max-ottoman
+    alt: "Max draped over the edge of an ottoman, wearing a green bandana"
+  - photo: max-floor
+    alt: "Max stretched out on a wood floor, looking up at the camera"
+
 sections:
   - id: guitars
     title: "Guitars"

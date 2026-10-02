@@ -6,8 +6,10 @@ A one-page static site listing gear from Aaron's Quint Guitars Reverb shop (http
 - `index.html`: generated output and the deliverable. It's self-contained, with photos embedded as base64 data URIs (~400KB). Don't hand-edit it; edit the sources and rebuild.
 - `items.yaml`: all listing data, meant for Aaron to edit by hand. Sections (`id`, `title`, `blurb`, `items`) and items (`name`, `price`, `photo`, `tags`, `description`, `reverb`, plus optional `original: true` for the "Original design" badge and `condition`). The header comment documents the fields. The link URL is `https://reverb.com/item/<reverb>`. Strings are quoted because names like "Esquire #04" would otherwise be cut off at `#` as a YAML comment.
 - `build.py`: the generator. It reads `items.yaml`, validates it (missing or unknown fields, a photo key not in `photos.json`, a non-numeric price) and writes `index.html`. PyYAML lives in a gitignored `.venv`. If `yaml` can't be imported, build.py re-runs itself under `.venv/bin/python`, so plain `python3 build.py` works. To recreate the venv: `python3 -m venv .venv && .venv/bin/pip install pyyaml`.
-- `template.html`: layout and CSS. Contains the placeholders `{{NAV}}`, `{{SECTIONS}}` and `{{COUNT}}`. (`{{TOTAL}}` is still filled by build.py but the template no longer uses it.)
-- `photos.json`: `{photo_key: "data:image/jpeg;base64,..."}`, JPEGs at 520px max and quality 0.72.
+- `template.html`: layout and CSS. Contains the placeholders `{{NAV}}`, `{{SECTIONS}}`, `{{MAX_PHOTOS}}` and `{{COUNT}}`. It starts with a real document head (`<!doctype>`, charset, viewport, description), which the page needs now that it's hosted on its own rather than as an artifact. (`{{TOTAL}}` is still filled by build.py but the template no longer uses it.)
+- `photos.json`: `{photo_key: "data:image/jpeg;base64,..."}`. Listing photos are JPEGs at 520px max and quality 0.72. The four `max-*` keys are photos of Max for the header, at 420×560 and quality 72.
+- `max_photos` in `items.yaml` lists the header photos of Max (`photo` key and `alt` text) in display order. They render as a staggered 2×2 grid beside the intro on screens 820px and wider, and as a row of four below it on phones.
+- **Strip metadata from any personal photo before embedding.** Aaron's iPhone photos carry GPS coordinates for his home. Re-encode them with Pillow (in `.venv`), which drops EXIF, as was done for the Max photos.
 - `img/`: empty and unused.
 
 ## Build

@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Guitars and pedals from Quint Guitars, sold to pay for my cat Max's surgery.">
 <title>Max's Surgery Gear Sale</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,8 +40,16 @@ body { background: var(--bg); color: var(--ink); font-family: var(--body); font-
 a { color: inherit; }
 a:focus-visible { outline: 2px solid var(--led); outline-offset: 3px; border-radius: 4px; }
 
-/* Header */
-.top { padding-block: 48px 28px; display: grid; gap: 16px; }
+/* Header: intro text, with a mosaic of Max beside it on wide screens and below it on phones */
+.top { padding-block: 48px 28px; display: grid; gap: 28px; align-items: center; }
+.intro { display: grid; gap: 16px; min-width: 0; }
+@media (min-width: 820px) { .top { grid-template-columns: minmax(0, 1fr) minmax(0, 380px); gap: 40px; } }
+.max { margin: 0; display: grid; gap: 8px; }
+.max .pics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+@media (min-width: 820px) { .max .pics { grid-template-columns: repeat(2, 1fr); gap: 10px; } .max .pics img:nth-child(even) { transform: translateY(18px); } .max { padding-bottom: 18px; } }
+.max img { width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; display: block; border-radius: 10px; border: 1px solid var(--line); background: var(--chip); }
+.max figcaption { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+@media (min-width: 820px) { .max figcaption { order: -1; } }
 .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 10px; margin: 0; }
 .led { width: 10px; height: 10px; border-radius: 50%; background: var(--led); box-shadow: 0 0 0 3px var(--led-glow), 0 0 12px var(--led-glow); flex: none; }
 h1 { font-family: var(--display); font-weight: 800; font-size: clamp(2.4rem, 7vw, 4.4rem); line-height: .98; letter-spacing: -.02em; margin: 0; text-wrap: balance; max-width: 14ch; }
@@ -81,6 +94,7 @@ footer p { margin: 0; max-width: 60ch; }
 </style>
 
 <header class="wrap top">
+  <div class="intro">
   <p class="eyebrow"><span class="led" aria-hidden="true"></span>Fundraiser · Quint Guitars</p>
   <h1>Max's Surgery Gear Sale</h1>
   <p class="lede">My cat Max needs surgery, so I'm selling guitars and pedals I've built over the years. Every purchase goes toward his vet bill. Thank you for helping out.</p>
@@ -89,6 +103,11 @@ footer p { margin: 0; max-width: 60ch; }
     <li>Ships from Kingston, NY</li>
     <li><a href="https://reverb.com/shop/quint-guitars" target="_blank" rel="noopener">Full shop on Reverb &#8599;</a></li>
   </ul>
+  </div>
+  <figure class="max">
+    <div class="pics">{{MAX_PHOTOS}}</div>
+    <figcaption>This is Max</figcaption>
+  </figure>
 </header>
 
 <nav class="rail" aria-label="Categories"><div class="wrap">{{NAV}}</div></nav>

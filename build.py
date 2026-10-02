@@ -19,7 +19,7 @@ R = "https://reverb.com/item/"
 REQUIRED = ('name', 'price', 'photo', 'tags', 'description', 'reverb')
 OPTIONAL = ('original', 'condition')
 
-def load_sections():
+def load_data():
     try:
         data = yaml.safe_load(open('items.yaml'))
     except yaml.YAMLError as err:
@@ -43,11 +43,17 @@ def load_sections():
                 errors.append(f"{who}: price should be a number, got {it['price']!r}")
             if isinstance(it.get('tags'), str):
                 it['tags'] = [it['tags']]
+    for p in data.get('max_photos') or []:
+        if p.get('photo') not in photos:
+            errors.append(f"max_photos: no photo '{p.get('photo')}' in photos.json")
+        if not p.get('alt'):
+            errors.append(f"max_photos: '{p.get('photo')}' is missing 'alt'")
     if errors:
         sys.exit("items.yaml problems:\n  " + "\n  ".join(errors))
-    return data['sections']
+    return data
 
-sections = load_sections()
+data = load_data()
+sections = data['sections']
 
 e = html.escape
 total = sum(i['price'] for s in sections for i in s['items'])
@@ -81,7 +87,9 @@ secs = ''.join(f'''
     <div class="grid">{''.join(card(i) for i in s['items'])}</div>
   </section>''' for s in sections)
 
+max_photos = ''.join(f'<img src="{photos[p["photo"]]}" alt="{e(p["alt"])}" width="420" height="560">' for p in data.get('max_photos') or [])
+
 tpl = open('template.html').read()
-out = tpl.replace('{{NAV}}', nav).replace('{{SECTIONS}}', secs).replace('{{COUNT}}', str(count)).replace('{{TOTAL}}', f'{total:,}')
+out = tpl.replace('{{NAV}}', nav).replace('{{SECTIONS}}', secs).replace('{{MAX_PHOTOS}}', max_photos).replace('{{COUNT}}', str(count)).replace('{{TOTAL}}', f'{total:,}')
 open('index.html', 'w').write(out)
 print(len(out), count, total)
