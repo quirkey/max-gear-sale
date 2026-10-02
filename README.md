@@ -4,7 +4,7 @@ One-page sale site for Quint Guitars gear (https://reverb.com/shop/quint-guitars
 
 ## Files
 - `index.html`: the finished page. It's self-contained (photos are embedded as data URIs), so you can upload it to any host.
-- `items.yaml`: the listings (name, price, photo, tags, description, Reverb slug), grouped into sections. This is the file to edit; the comment at the top explains each field.
+- `items.yaml`: the listings (name, price, photo, tags, description, Reverb slug), grouped into sections. This is the file to edit. It also holds the `intro` paragraph under the page title and the `max_photos` header list. The comment at the top explains each field.
 - `build.py`: generates `index.html` from `items.yaml` and checks it for mistakes such as a missing field or a photo that isn't in `photos.json`.
 - `template.html`: page layout and CSS. `{{NAV}}`, `{{SECTIONS}}` and `{{COUNT}}` are placeholders that build.py fills in.
 - `photos.json`: listing photos as base64 JPEG data URIs (520px max), keyed by item id (e.g. `drivetrem`, `esquire`), plus the `max-*` header photos. The `max_photos` list in `items.yaml` picks which header photos show and holds their alt text. Remove location metadata from phone photos before adding them, because the page is public.

@@ -13,6 +13,9 @@
 #
 # Items appear in the order listed. Keep text in quotes.
 
+# The paragraph under the page title. Plain text; keep it in quotes.
+intro: "My cat Max needs surgery, so I'm selling guitars and pedals I've built over the years. Every purchase goes toward his vet bill. Thank you for helping out."
+
 # Photos of Max in the page header, in display order. "photo" is a key in
 # photos.json; "alt" describes the photo for screen readers.
 max_photos:

@@ -48,6 +48,8 @@ def load_data():
             errors.append(f"max_photos: no photo '{p.get('photo')}' in photos.json")
         if not p.get('alt'):
             errors.append(f"max_photos: '{p.get('photo')}' is missing 'alt'")
+    if not data.get('intro'):
+        errors.append("missing 'intro' (the paragraph under the page title)")
     if errors:
         sys.exit("items.yaml problems:\n  " + "\n  ".join(errors))
     return data
@@ -87,9 +89,9 @@ secs = ''.join(f'''
     <div class="grid">{''.join(card(i) for i in s['items'])}</div>
   </section>''' for s in sections)
 
-max_photos = ''.join(f'<img src="{photos[p["photo"]]}" alt="{e(p["alt"])}" width="420" height="560">' for p in data.get('max_photos') or [])
+max_photos = ''.join(f'<img src="{photos[p["photo"]]}" alt="{e(p["alt"])}" width="540" height="720">' for p in data.get('max_photos') or [])
 
 tpl = open('template.html').read()
-out = tpl.replace('{{NAV}}', nav).replace('{{SECTIONS}}', secs).replace('{{MAX_PHOTOS}}', max_photos).replace('{{COUNT}}', str(count)).replace('{{TOTAL}}', f'{total:,}')
+out = tpl.replace('{{NAV}}', nav).replace('{{SECTIONS}}', secs).replace('{{MAX_PHOTOS}}', max_photos).replace('{{INTRO}}', e(data['intro'].strip())).replace('{{COUNT}}', str(count)).replace('{{TOTAL}}', f'{total:,}')
 open('index.html', 'w').write(out)
 print(len(out), count, total)
