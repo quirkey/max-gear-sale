@@ -12,6 +12,9 @@ A one-page static site listing gear from Aaron's Quint Guitars Reverb shop (http
 ## Build
     python3 build.py   # writes index.html, prints size / item count / total $
 
+## Deploy
+GitHub Pages from the `main` branch root of https://github.com/quirkey/max-gear-sale. Live at https://quirkey.github.io/max-gear-sale/. To update: `python3 build.py`, commit, `git push`. Pages rebuilds in about a minute.
+
 ## Content decisions (from Aaron)
 - Categories: Guitars, Pedals. (The Pedal-building tools section, 3 drill templates, was removed on 2026-10-02 at Aaron's request; their photos are still in `photos.json` but unused.) Each card has a photo, name, price, a one-line description, effect-type tags and a link.
 - No condition tags (Brand New, Excellent, etc.). The condition field is still in the data but isn't rendered.

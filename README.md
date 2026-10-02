@@ -11,6 +11,9 @@ One-page sale site for Quint Guitars gear (https://reverb.com/shop/quint-guitars
 ## Rebuild
     python3 build.py
 
+## Deploy
+GitHub Pages from the `main` branch root of https://github.com/quirkey/max-gear-sale. Live at https://quirkey.github.io/max-gear-sale/. To update: `python3 build.py`, commit, `git push`. Pages rebuilds in about a minute.
+
 ## Notes
 - Photos were pulled from Reverb's image CDN (rvb-img.reverb.com) through the browser, because that host was blocked for direct downloads. If the page is hosted somewhere normal, you can hotlink the Reverb image URLs instead of embedding them.
 - Listing data came from the Reverb API (`https://api.reverb.com/api/listings/all?shop=quint-guitars`, headers `Accept: application/hal+json`, `Accept-Version: 3.0`). Prices are a snapshot from Oct 1, 2026.
