@@ -1,0 +1,101 @@
+<title>Max's Surgery Gear Sale</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: a pedalboard-style shop sheet. Short header, sticky category rail, wrapping grid of square-photo cards. */
+:root {
+  --bg: #eceff0;        /* powder-coated enclosure grey */
+  --surface: #ffffff;
+  --ink: #172026;
+  --muted: #56656d;
+  --line: #d3dade;
+  --led: #c97c00;       /* pilot-LED amber */
+  --led-glow: rgba(242,170,40,.35);
+  --chip: #e3e8ea;
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --body: "Atkinson Hyperlegible", "Helvetica Neue", Arial, sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111619; --surface: #1a2125; --ink: #e7edef; --muted: #98a7ae; --line: #2a343a;
+    --led: #f2b23a; --led-glow: rgba(242,178,58,.35); --chip: #242d32; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111619; --surface: #1a2125; --ink: #e7edef; --muted: #98a7ae; --line: #2a343a;
+  --led: #f2b23a; --led-glow: rgba(242,178,58,.35); --chip: #242d32; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.5; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; }
+a { color: inherit; }
+a:focus-visible { outline: 2px solid var(--led); outline-offset: 3px; border-radius: 4px; }
+
+/* Header */
+.top { padding-block: 48px 28px; display: grid; gap: 16px; }
+.eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 10px; margin: 0; }
+.led { width: 10px; height: 10px; border-radius: 50%; background: var(--led); box-shadow: 0 0 0 3px var(--led-glow), 0 0 12px var(--led-glow); flex: none; }
+h1 { font-family: var(--display); font-weight: 800; font-size: clamp(2.4rem, 7vw, 4.4rem); line-height: .98; letter-spacing: -.02em; margin: 0; text-wrap: balance; max-width: 14ch; }
+.lede { font-size: 1.15rem; max-width: 58ch; margin: 0; }
+.stats { font-family: var(--mono); font-size: 13px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 4px 0 0; padding: 0; list-style: none; font-variant-numeric: tabular-nums; }
+.stats strong { color: var(--ink); font-weight: 500; }
+.stats a { text-underline-offset: 3px; }
+
+/* Category rail */
+.rail { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); border-block: 1px solid var(--line); }
+.rail .wrap { display: flex; gap: 8px; overflow-x: auto; padding-block: 10px; scrollbar-width: none; }
+.rail a { flex: none; text-decoration: none; font-family: var(--mono); font-size: 13px; padding: 7px 12px; border-radius: 999px; background: var(--chip); }
+.rail a span { color: var(--muted); margin-left: 4px; }
+.rail a:hover { background: var(--surface); }
+
+/* Sections */
+.cat { padding-block: 40px 8px; scroll-margin-top: 56px; }
+.cat-head { display: grid; gap: 6px; margin-bottom: 20px; }
+.cat-head h2 { font-family: var(--display); font-weight: 800; font-size: clamp(1.6rem, 4vw, 2.2rem); letter-spacing: -.01em; margin: 0; }
+.cat-head p { margin: 0; color: var(--muted); max-width: 62ch; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 18px; }
+
+.item { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.photo { position: relative; display: block; aspect-ratio: 1; max-width: 100%; background: var(--chip); }
+.photo img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s ease; }
+.item:hover .photo img { transform: scale(1.03); }
+@media (prefers-reduced-motion: reduce) { .photo img { transition: none; } .item:hover .photo img { transform: none; } }
+.badge { position: absolute; left: 10px; top: 10px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; background: var(--led); color: #1a1205; padding: 4px 8px; border-radius: 4px; }
+.body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+h3 { font-family: var(--display); font-weight: 600; font-size: 1.15rem; line-height: 1.2; margin: 0; min-width: 0; }
+.price { font-family: var(--mono); font-size: 1.05rem; margin: 0; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.desc { margin: 0; color: var(--muted); font-size: .95rem; }
+.tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.tags li { font-family: var(--mono); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; padding: 3px 7px; border-radius: 4px; background: var(--chip); color: var(--muted); }
+.tags .cond { background: transparent; border: 1px solid var(--line); color: var(--ink); }
+.buy { margin-top: auto; align-self: flex-start; font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--led); padding-bottom: 1px; }
+.buy:hover { color: var(--led); }
+
+footer { padding-block: 48px 40px; color: var(--muted); font-size: .95rem; }
+footer p { margin: 0; max-width: 60ch; }
+</style>
+
+<header class="wrap top">
+  <p class="eyebrow"><span class="led" aria-hidden="true"></span>Fundraiser · Quint Guitars</p>
+  <h1>Max's Surgery Gear Sale</h1>
+  <p class="lede">My cat Max needs surgery, so I'm selling guitars and pedals I've built over the years. Every purchase goes toward his vet bill. Thank you for helping out.</p>
+  <ul class="stats">
+    <li><strong>{{COUNT}}</strong> items</li>
+    <li>Ships from Kingston, NY</li>
+    <li><a href="https://reverb.com/shop/quint-guitars" target="_blank" rel="noopener">Full shop on Reverb &#8599;</a></li>
+  </ul>
+</header>
+
+<nav class="rail" aria-label="Categories"><div class="wrap">{{NAV}}</div></nav>
+
+<main class="wrap">{{SECTIONS}}
+</main>
+
+<footer class="wrap">
+  <p>Checkout, shipping and buyer protection are handled through Reverb. Prices match the current Reverb listings.</p>
+</footer>
