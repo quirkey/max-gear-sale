@@ -8,6 +8,7 @@
 #   tags:        effect-type chips shown on the card
 #   description: one line under the title
 #   reverb:      listing slug; the link is https://reverb.com/item/<slug>
+#   url:         full link, for items not on Reverb (use instead of reverb)
 #   original:    true shows the "Original design" badge (optional)
 #   condition:   kept for reference; not shown on the page (optional)
 #
@@ -58,6 +59,13 @@ sections:
     title: "Guitars"
     blurb: "Partscasters I assembled, finished and set up in the shop."
     items:
+      - name: "Jazzcaster #03, Black over Sunburst"
+        price: 1200
+        photo: jazzcaster03
+        tags: ["Solid body"]
+        description: "Relic'd black-over-sunburst nitro finish with Gemini Suprocaster and goldfoil pickups."
+        url: https://quintguitars.com/guitars/jazzcaster-03/
+
       - name: "Esquire #04, Daphne Blue"
         price: 900
         photo: esquire

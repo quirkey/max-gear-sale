@@ -20,4 +20,4 @@ GitHub Pages from the `main` branch root of https://github.com/quirkey/max-gear-
 ## Notes
 - Photos were pulled from Reverb's image CDN (rvb-img.reverb.com) through the browser, because that host was blocked for direct downloads. If the page is hosted somewhere normal, you can hotlink the Reverb image URLs instead of embedding them.
 - Listing data came from the Reverb API (`https://api.reverb.com/api/listings/all?shop=quint-guitars`, headers `Accept: application/hal+json`, `Accept-Version: 3.0`). Prices are a snapshot from Oct 1, 2026.
-- Items: 2 guitars, 9 pedals (Drive Trem is an original design, the rest are Clone Lab builds). The 3 drill templates were removed from the page.
+- Items: 3 guitars (Jazzcaster #03 links to quintguitars.com rather than Reverb), 9 pedals (Drive Trem is an original design, the rest are Clone Lab builds). The 3 drill templates were removed from the page.
