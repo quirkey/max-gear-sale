@@ -87,13 +87,13 @@ sections:
         price: 700
         photo: american-strat
         tags: ["Solid body"]
-        description: "A US-made Strat in black with a maple neck and Fender's Yosemite single-coils."
+        description: "A US-made Strat in black with a maple neck and Fender's Tex-mex single-coils. Great condition with a nice neck and classic sound."
 
       - name: "Epiphone Les Paul Junior"
         price: 250
         photo: lp-jr
         tags: ["Solid body"]
-        description: "A no-frills single-pickup slab body in vintage sunburst."
+        description: "A no-frills single-pickup slab body in vintage sunburst. Stock parts but feels great. SUPER hot humbucker pickup (~11K!)"
 
   - id: amps
     title: "Amps"
@@ -103,13 +103,13 @@ sections:
         price: 400
         photo: vox-ac30
         tags: ["Tube", "2×12 combo"]
-        description: "The 30-watt British combo behind decades of chime and jangle."
+        description: "Classic 30-watt British combo. I bought this already modified. The reverb tank has been removed and casters were added."
 
       - name: "Fender Hot Rod Deluxe"
         price: 300
         photo: fender-hrd
         tags: ["Tube", "1×12 combo"]
-        description: "A 40-watt all-tube combo with clean, drive and more-drive channels plus spring reverb."
+        description: "A 40-watt all-tube combo with clean, drive and more-drive channels plus spring reverb. Very very loud. Comes with a simple attenuator knob to allow for playing at home volumes."
 
   - id: pedals
     title: "Pedals"
@@ -199,5 +199,16 @@ sections:
       alt: "Four shelves of guitar pedals on a white wall"
       note: "Not everything here has its own listing yet. If you see something you like, email or DM me."
       list:
+        - { name: "Focus Fuzz Clone", price: 80 }
+        - { name: "EHX Lizard Queen (Ocatve Fuzz) Clone", price: 90 }
+        - { name: "Kingtone Octaland (Octave Fuzz) Clone", price: 90 }
+        - { name: "EQD Hizumitas (Big Muff variant) Clone", price: 100 }
+        - { name: "Moonshot Tremolo Clone", price: 70 }
+        - { name: "EQD Hummingbird Tremolo Clone", price: 60 }
+        - { name: "Lovepedal Vibronaut (Uni-vibe) Clone", price: 100 }
+        - { name: "Mu-tron III (Envelope Filter) clone", price: 150}
+        - { name: "EHX 720 Looper (with power supply)", price: 110}
+        - { name: "Aclam Womantone (Overdrive) Clone", price: 120}
+        - { name: "Greer Southland (Overdrive) Clone", price: 70}
         # - "Example pedal"
         # - { name: "Another pedal", price: 60 }
