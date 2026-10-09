@@ -193,6 +193,7 @@ sections:
     # name, or a name and price:
     #   - "Pedal name"
     #   - { name: "Pedal name", price: 60 }
+    #   - { name: "Pedal name", price: "70-200" }   (a price range)
     more:
       title: "More pedals"
       photo: wall-of-pedals
@@ -210,5 +211,6 @@ sections:
         - { name: "EHX 720 Looper (with power supply)", price: 110}
         - { name: "Aclam Womantone (Overdrive) Clone", price: 120}
         - { name: "Greer Southland (Overdrive) Clone", price: 70}
+        - { name: "Various Crybaby Wah Pedals", price: "70-200"}
         # - "Example pedal"
         # - { name: "Another pedal", price: 60 }

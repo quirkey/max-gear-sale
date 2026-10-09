@@ -64,8 +64,9 @@ def load_data():
                 if not isinstance(x, dict) or not x.get('name'):
                     errors.append(f"{where}: list entry {x!r} needs a name")
                     continue
-                if x.get('price') is not None and not isinstance(x['price'], (int, float)):
-                    errors.append(f"{where}: {x['name']}: price should be a number, got {x['price']!r}")
+                pr = x.get('price')
+                if pr is not None and not isinstance(pr, (int, float)) and not re.fullmatch(r'\s*\d+\s*-\s*\d+\s*', str(pr)):
+                    errors.append(f"{where}: {x['name']}: price should be a number or a range like \"70-200\", got {pr!r}")
                 entries.append(x)
             more['list'] = entries
     for p in data.get('max_photos') or []:
@@ -95,7 +96,14 @@ def linkify(text):
 def extras(s):
     return (s.get('more') or {}).get('list') or []
 
-total = sum(i['price'] for s in sections for i in s['items']) + sum(x.get('price') or 0 for s in sections for x in extras(s))
+def fmt_price(p):
+    # A number, or a "low-high" range string (list entries only).
+    if isinstance(p, (int, float)):
+        return f'${p:,}'
+    lo, hi = (int(v) for v in str(p).split('-'))
+    return f'${lo:,}&ndash;${hi:,}'
+
+total = sum(i['price'] for s in sections for i in s['items']) + sum(x['price'] for s in sections for x in extras(s) if isinstance(x.get('price'), (int, float)))
 count = sum(len(s['items']) + len(extras(s)) for s in sections)
 
 def card(it):
@@ -127,7 +135,7 @@ def more_block(s):
     m = s.get('more')
     if not m:
         return ''
-    rows = ''.join(f'<li><span>{e(x["name"])}</span>' + (f'<span class="price">${x["price"]:,}</span>' if x.get('price') is not None else '') + '</li>' for x in m['list'])
+    rows = ''.join(f'<li><span>{e(x["name"])}</span>' + (f'<span class="price">{fmt_price(x["price"])}</span>' if x.get('price') is not None else '') + '</li>' for x in m['list'])
     return f'''
     <div class="more">
       <img src="{photos[m['photo']]}" alt="{e(m['alt'])}" loading="lazy">
