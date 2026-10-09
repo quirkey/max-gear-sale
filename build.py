@@ -18,6 +18,7 @@ except ImportError:
 photos = {os.path.splitext(f)[0]: f"img/{f}?v={hashlib.md5(open(f'img/{f}', 'rb').read()).hexdigest()[:8]}"
           for f in sorted(os.listdir('img')) if f.endswith('.jpg')}
 R = "https://reverb.com/item/"
+SITE = "https://quirkey.github.io/max-gear-sale/"  # live URL; link previews need absolute URLs
 EMAIL = "aaron@quirkey.com"  # for items with no listing link
 
 REQUIRED = ('name', 'price', 'photo', 'tags', 'description')
@@ -160,6 +161,6 @@ secs = ''.join(f'''
 max_photos = ''.join(f'<img src="{photos[p["photo"]]}" alt="{e(p["alt"])}" width="540" height="720">' for p in data.get('max_photos') or [])
 
 tpl = open('template.html').read()
-out = tpl.replace('{{NAV}}', nav).replace('{{SECTIONS}}', secs).replace('{{MAX_PHOTOS}}', max_photos).replace('{{INTRO}}', ''.join(f'<p>{linkify(p.strip())}</p>' for p in data['intro'].strip().split('\n') if p.strip())).replace('{{COUNT}}', str(count)).replace('{{TOTAL}}', f'{total:,}')
+out = tpl.replace('{{SITE}}', SITE).replace('{{OG_IMAGE}}', SITE + photos['og-max']).replace('{{NAV}}', nav).replace('{{SECTIONS}}', secs).replace('{{MAX_PHOTOS}}', max_photos).replace('{{INTRO}}', ''.join(f'<p>{linkify(p.strip())}</p>' for p in data['intro'].strip().split('\n') if p.strip())).replace('{{COUNT}}', str(count)).replace('{{TOTAL}}', f'{total:,}')
 open('index.html', 'w').write(out)
 print(len(out), count, total)

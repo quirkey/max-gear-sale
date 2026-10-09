@@ -28,6 +28,7 @@ GitHub Pages from the `main` branch root of https://github.com/quirkey/max-gear-
 ## Design
 - Look: powder-coated enclosure grey with a pilot-LED amber accent. Light and dark themes are both defined as CSS tokens in `:root`, with a `prefers-color-scheme` block and `[data-theme]` overrides.
 - Fonts (Google Fonts): Bricolage Grotesque for display, Atkinson Hyperlegible for body text, JetBrains Mono for labels and prices.
+- Link previews: Open Graph and Twitter tags in the template head use `img/og-max.jpg`, a 960×504 landscape crop of Max's face from `IMG_4503 Large.jpeg` (`--crop 0,380,960,884 --max 960`), so pasted links show Max instead of a guitar. `SITE` in build.py is the live URL, because the tags need absolute URLs; update it if the site moves.
 - Item cards use 4:5 portrait photos (`.photo` aspect-ratio), cropped with object-fit: cover. Re-crop landscape photos to portrait with `add_photo.py --crop`.
 - Header with a stats line (location, shop link; item counts and the total $ are deliberately not shown, per Aaron, in the header or on the category tabs), then a sticky category rail and a responsive card grid.
 
