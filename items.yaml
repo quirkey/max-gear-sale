@@ -87,7 +87,7 @@ sections:
         price: 700
         photo: american-strat
         tags: ["Solid body"]
-        description: "A US-made Strat in black with a maple neck and Fender's Tex-mex single-coils. Great condition with a nice neck and classic sound."
+        description: "A US-made Strat in black with a maple neck and Fender's Tex-Mex single-coils. Great condition with a nice neck and classic sound."
 
       - name: "Epiphone Les Paul Junior"
         price: 250
@@ -200,13 +200,13 @@ sections:
       note: "Not everything here has its own listing yet. If you see something you like, email or DM me."
       list:
         - { name: "Focus Fuzz Clone", price: 80 }
-        - { name: "EHX Lizard Queen (Ocatve Fuzz) Clone", price: 90 }
+        - { name: "EHX Lizard Queen (Octave Fuzz) Clone", price: 90 }
         - { name: "Kingtone Octaland (Octave Fuzz) Clone", price: 90 }
         - { name: "EQD Hizumitas (Big Muff variant) Clone", price: 100 }
         - { name: "Moonshot Tremolo Clone", price: 70 }
         - { name: "EQD Hummingbird Tremolo Clone", price: 60 }
         - { name: "Lovepedal Vibronaut (Uni-vibe) Clone", price: 100 }
-        - { name: "Mu-tron III (Envelope Filter) clone", price: 150}
+        - { name: "Mu-tron III (Envelope Filter) Clone", price: 150}
         - { name: "EHX 720 Looper (with power supply)", price: 110}
         - { name: "Aclam Womantone (Overdrive) Clone", price: 120}
         - { name: "Greer Southland (Overdrive) Clone", price: 70}
