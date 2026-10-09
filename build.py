@@ -147,7 +147,7 @@ def more_block(s):
       </div>
     </div>'''
 
-nav = ''.join(f'<a href="#{s["id"]}">{e(s["title"])} <span>{len(s["items"]) + len(extras(s))}</span></a>' for s in sections)
+nav = ''.join(f'<a href="#{s["id"]}">{e(s["title"])}</a>' for s in sections)
 secs = ''.join(f'''
   <section id="{s['id']}" class="cat">
     <header class="cat-head">
