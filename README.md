@@ -3,16 +3,17 @@
 One-page sale site for Quint Guitars gear (https://reverb.com/shop/quint-guitars), raising money for Max's surgery.
 
 ## Files
-- `index.html`: the finished page. It's self-contained (photos are embedded as data URIs), so you can upload it to any host.
+- `index.html`: the finished page. It loads photos from `img/`, so host it together with that folder.
 - `items.yaml`: the listings (name, price, photo, tags, description, Reverb slug), grouped into sections. This is the file to edit. It also holds the `intro` paragraph under the page title and the `max_photos` header list. The comment at the top explains each field.
-- `build.py`: generates `index.html` from `items.yaml` and checks it for mistakes such as a missing field or a photo that isn't in `photos.json`.
+- `build.py`: generates `index.html` from `items.yaml` and checks it for mistakes such as a missing field or a photo that isn't in `img/`.
 - `template.html`: page layout and CSS. `{{NAV}}`, `{{SECTIONS}}` and `{{COUNT}}` are placeholders that build.py fills in.
-- `photos.json`: listing photos as base64 JPEG data URIs (520px max), keyed by item id (e.g. `drivetrem`, `esquire`), plus the `max-*` header photos. The `max_photos` list in `items.yaml` picks which header photos show and holds their alt text. Remove location metadata from phone photos before adding them, because the page is public.
+- `img/`: one JPEG per photo, named by its key (e.g. `img/drivetrem.jpg`), plus the `max-*` header photos.
+- `add_photo.py`: adds a photo to `img/`, resized and with location data stripped: `python3 add_photo.py ~/Downloads/photo.jpeg my-key`, then use `photo: my-key` in `items.yaml`. Options: `--max 720` for a bigger image, `--crop x0,y0,x1,y1` to crop first. The `max_photos` list in `items.yaml` picks which header photos show and holds their alt text. Always add photos with `add_photo.py`, never by copying them into `img/`, because phone photos carry location data and the page is public.
 
 ## Rebuild
     python3 build.py
 
-First time on a new machine: `python3 -m venv .venv && .venv/bin/pip install pyyaml`
+First time on a new machine: `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt`
 
 ## Deploy
 GitHub Pages from the `main` branch root of https://github.com/quirkey/max-gear-sale. Live at https://quirkey.github.io/max-gear-sale/. To update: edit `items.yaml`, `python3 build.py`, commit, `git push`. Pages rebuilds in about a minute.

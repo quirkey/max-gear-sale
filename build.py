@@ -1,4 +1,4 @@
-import json, html, os, re, sys
+import hashlib, html, os, re, sys
 from urllib.parse import quote
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -12,9 +12,11 @@ except ImportError:
     venv_py = os.path.join(venv, 'bin', 'python')
     if os.path.exists(venv_py) and os.path.realpath(sys.prefix) != os.path.realpath(venv):
         os.execv(venv_py, [venv_py, *sys.argv])
-    sys.exit("PyYAML is missing. Run: python3 -m venv .venv && .venv/bin/pip install pyyaml")
+    sys.exit("PyYAML is missing. Run: python3 -m venv .venv && .venv/bin/pip install -r requirements.txt")
 
-photos = json.load(open('photos.json'))
+# Photos live in img/<key>.jpg. The ?v= hash makes browsers refetch a photo when its file changes.
+photos = {os.path.splitext(f)[0]: f"img/{f}?v={hashlib.md5(open(f'img/{f}', 'rb').read()).hexdigest()[:8]}"
+          for f in sorted(os.listdir('img')) if f.endswith('.jpg')}
 R = "https://reverb.com/item/"
 EMAIL = "aaron@quirkey.com"  # for items with no listing link
 
@@ -42,7 +44,7 @@ def load_data():
             if it.get('reverb') and it.get('url'):
                 errors.append(f"{who}: has both 'reverb' and 'url'; keep one")
             if 'photo' in it and it['photo'] not in photos:
-                errors.append(f"{who}: no photo '{it['photo']}' in photos.json")
+                errors.append(f"{who}: no photo '{it['photo']}' (expected img/{it['photo']}.jpg)")
             if 'price' in it and not isinstance(it['price'], (int, float)):
                 errors.append(f"{who}: price should be a number, got {it['price']!r}")
             if isinstance(it.get('tags'), str):
@@ -54,7 +56,7 @@ def load_data():
                 if not more.get(k):
                     errors.append(f"{where}: missing '{k}'")
             if more.get('photo') and more['photo'] not in photos:
-                errors.append(f"{where}: no photo '{more['photo']}' in photos.json")
+                errors.append(f"{where}: no photo '{more['photo']}' (expected img/{more['photo']}.jpg)")
             # Each list entry is a name, or {name, price}; normalize to dicts.
             entries = []
             for x in more.get('list') or []:
@@ -68,7 +70,7 @@ def load_data():
             more['list'] = entries
     for p in data.get('max_photos') or []:
         if p.get('photo') not in photos:
-            errors.append(f"max_photos: no photo '{p.get('photo')}' in photos.json")
+            errors.append(f"max_photos: no photo '{p.get('photo')}' (expected img/{p.get('photo')}.jpg)")
         if not p.get('alt'):
             errors.append(f"max_photos: '{p.get('photo')}' is missing 'alt'")
     if not data.get('intro'):
