@@ -109,7 +109,7 @@ count = sum(len(s['items']) + len(extras(s)) for s in sections)
 def card(it):
     name = it['name']
     badge = '<span class="badge">Original design</span>' if it.get('original') else ''
-    img = f'<img src="{photos[it['photo']]}" alt="{e(name)}" loading="lazy" width="520" height="520">{badge}'
+    img = f'<img src="{photos[it['photo']]}" alt="{e(name)}" loading="lazy" width="416" height="520">{badge}'
     if it.get('reverb') or it.get('url'):
         href = R + it['reverb'] if it.get('reverb') else it['url']
         site = 'Reverb' if it.get('reverb') else re.sub(r'^www\.', '', re.sub(r'^\w+://', '', href).split('/')[0])

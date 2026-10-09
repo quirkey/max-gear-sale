@@ -20,7 +20,7 @@ A one-page static site listing gear from Aaron's Quint Guitars Reverb shop (http
 GitHub Pages from the `main` branch root of https://github.com/quirkey/max-gear-sale. Live at https://quirkey.github.io/max-gear-sale/. To update: edit `items.yaml`, `python3 build.py`, commit, `git push`. Pages rebuilds in about a minute.
 
 ## Content decisions (from Aaron)
-- Categories: Guitars, Amps, Pedals. (Amps added 2026-10-09: Vox AC30 $400 and Fender Hot Rod Deluxe $300, photos from `~/Downloads/vox-ac-30.jpeg` (square crop, shifted left so the logo isn't clipped) and `fender-amp-front.jpeg`. Neither is listed anywhere, so their buttons email Aaron.) (The Pedal-building tools section, 3 drill templates, was removed on 2026-10-02 at Aaron's request; their photos were deleted on 2026-10-09 and are in git history if needed.) Each card has a photo, name, price, a one-line description, effect-type tags and a link.
+- Categories: Guitars, Amps, Pedals. (Amps added 2026-10-09: Vox AC30 $400 and Fender Hot Rod Deluxe $300, photos from `~/Downloads/vox-ac-30.jpeg` (4:5 portrait crop `--crop 40,0,808,960`, shifted left so the logo isn't clipped) and `fender-amp-front.jpeg` (center portrait crop `--crop 256,0,1024,960`). Neither is listed anywhere, so their buttons email Aaron.) (The Pedal-building tools section, 3 drill templates, was removed on 2026-10-02 at Aaron's request; their photos were deleted on 2026-10-09 and are in git history if needed.) Each card has a photo, name, price, a one-line description, effect-type tags and a link.
 - No condition tags (Brand New, Excellent, etc.). The condition field is still in the data but isn't rendered.
 - The link text is "More info on Reverb", not "Buy on Reverb".
 - Within Pedals, the Drive Trem (Aaron's original design) comes first. The rest are "Clone Lab" builds: part-for-part clones on PedalPCB boards.
@@ -28,6 +28,7 @@ GitHub Pages from the `main` branch root of https://github.com/quirkey/max-gear-
 ## Design
 - Look: powder-coated enclosure grey with a pilot-LED amber accent. Light and dark themes are both defined as CSS tokens in `:root`, with a `prefers-color-scheme` block and `[data-theme]` overrides.
 - Fonts (Google Fonts): Bricolage Grotesque for display, Atkinson Hyperlegible for body text, JetBrains Mono for labels and prices.
+- Item cards use 4:5 portrait photos (`.photo` aspect-ratio), cropped with object-fit: cover. Re-crop landscape photos to portrait with `add_photo.py --crop`.
 - Header with a stats line (location, shop link; item counts and the total $ are deliberately not shown, per Aaron, in the header or on the category tabs), then a sticky category rail and a responsive card grid.
 
 ## Data sources
