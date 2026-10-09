@@ -58,7 +58,7 @@ max_photos:
 sections:
   - id: guitars
     title: "Guitars"
-    blurb: "Partscasters I assembled, finished and set up in the shop."
+    blurb: "Partscasters I assembled, finished and set up in the shop, plus a couple of factory guitars."
     items:
       - name: "Jazzcaster #03, Black over Sunburst"
         price: 1200
@@ -82,6 +82,18 @@ sections:
         description: "A hand-finished partscaster with premium parts and a full setup."
         reverb: 91230133-quint-guitars-07-jazzcaster-fiesta-red
         condition: "Brand New"
+
+      - name: "Fender American Performer Strat"
+        price: 700
+        photo: american-strat
+        tags: ["Solid body"]
+        description: "A US-made Strat in black with a maple neck and Fender's Yosemite single-coils."
+
+      - name: "Epiphone Les Paul Junior"
+        price: 250
+        photo: lp-jr
+        tags: ["Solid body"]
+        description: "A no-frills single-pickup slab body in vintage sunburst."
 
   - id: amps
     title: "Amps"
@@ -175,3 +187,17 @@ sections:
         description: "Clone of the EQD Levitation, an ambient reverb built on the Belton brick."
         reverb: 99862655-quint-guitars-clone-lab-levitation
         condition: "Very Good"
+
+    # Shown under the pedal cards: one photo, a note, and a plain list for
+    # pedals without their own photo or description. List each pedal as just a
+    # name, or a name and price:
+    #   - "Pedal name"
+    #   - { name: "Pedal name", price: 60 }
+    more:
+      title: "More pedals"
+      photo: wall-of-pedals
+      alt: "Four shelves of guitar pedals on a white wall"
+      note: "Not everything here has its own listing yet. If you see something you like, email or DM me."
+      list:
+        # - "Example pedal"
+        # - { name: "Another pedal", price: 60 }

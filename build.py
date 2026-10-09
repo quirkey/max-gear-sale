@@ -28,7 +28,7 @@ def load_data():
         sys.exit(f"items.yaml has a syntax error:\n{err}")
     errors = []
     for s in data['sections']:
-        for k in ('id', 'title', 'blurb', 'items'):
+        for k in ('id', 'title', 'blurb', 'items'):  # plus optional 'more'
             if k not in s:
                 errors.append(f"section {s.get('id') or s.get('title') or '?'}: missing '{k}'")
         for it in s.get('items') or []:
@@ -47,6 +47,25 @@ def load_data():
                 errors.append(f"{who}: price should be a number, got {it['price']!r}")
             if isinstance(it.get('tags'), str):
                 it['tags'] = [it['tags']]
+        more = s.get('more')
+        if more:
+            where = f"{s.get('id')} 'more'"
+            for k in ('title', 'photo', 'alt', 'note'):
+                if not more.get(k):
+                    errors.append(f"{where}: missing '{k}'")
+            if more.get('photo') and more['photo'] not in photos:
+                errors.append(f"{where}: no photo '{more['photo']}' in photos.json")
+            # Each list entry is a name, or {name, price}; normalize to dicts.
+            entries = []
+            for x in more.get('list') or []:
+                x = {'name': x} if isinstance(x, str) else x
+                if not isinstance(x, dict) or not x.get('name'):
+                    errors.append(f"{where}: list entry {x!r} needs a name")
+                    continue
+                if x.get('price') is not None and not isinstance(x['price'], (int, float)):
+                    errors.append(f"{where}: {x['name']}: price should be a number, got {x['price']!r}")
+                entries.append(x)
+            more['list'] = entries
     for p in data.get('max_photos') or []:
         if p.get('photo') not in photos:
             errors.append(f"max_photos: no photo '{p.get('photo')}' in photos.json")
@@ -71,8 +90,11 @@ def linkify(text):
         ext = '' if url.startswith('mailto:') else ' target="_blank" rel="noopener"'
         return f'<a href="{url}"{ext}>{label}</a>'
     return re.sub(r'\[([^\]]+)\]\(([^)\s]+)\)', a, e(text))
-total = sum(i['price'] for s in sections for i in s['items'])
-count = sum(len(s['items']) for s in sections)
+def extras(s):
+    return (s.get('more') or {}).get('list') or []
+
+total = sum(i['price'] for s in sections for i in s['items']) + sum(x.get('price') or 0 for s in sections for x in extras(s))
+count = sum(len(s['items']) + len(extras(s)) for s in sections)
 
 def card(it):
     name = it['name']
@@ -99,14 +121,30 @@ def card(it):
         </div>
       </article>'''
 
-nav = ''.join(f'<a href="#{s["id"]}">{e(s["title"])} <span>{len(s["items"])}</span></a>' for s in sections)
+def more_block(s):
+    m = s.get('more')
+    if not m:
+        return ''
+    rows = ''.join(f'<li><span>{e(x["name"])}</span>' + (f'<span class="price">${x["price"]:,}</span>' if x.get('price') is not None else '') + '</li>' for x in m['list'])
+    return f'''
+    <div class="more">
+      <img src="{photos[m['photo']]}" alt="{e(m['alt'])}" loading="lazy">
+      <div class="more-body">
+        <h3>{e(m['title'])}</h3>
+        <p class="desc">{linkify(m['note'])}</p>
+        {f'<ul class="more-list">{rows}</ul>' if rows else ''}
+        <a class="buy" href="mailto:{EMAIL}?subject={quote(m['title'])}">Email me about these</a>
+      </div>
+    </div>'''
+
+nav = ''.join(f'<a href="#{s["id"]}">{e(s["title"])} <span>{len(s["items"]) + len(extras(s))}</span></a>' for s in sections)
 secs = ''.join(f'''
   <section id="{s['id']}" class="cat">
     <header class="cat-head">
       <h2>{e(s['title'])}</h2>
       <p>{e(s['blurb'])}</p>
     </header>
-    <div class="grid">{''.join(card(i) for i in s['items'])}</div>
+    <div class="grid">{''.join(card(i) for i in s['items'])}</div>{more_block(s)}
   </section>''' for s in sections)
 
 max_photos = ''.join(f'<img src="{photos[p["photo"]]}" alt="{e(p["alt"])}" width="540" height="720">' for p in data.get('max_photos') or [])
