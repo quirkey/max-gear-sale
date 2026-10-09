@@ -9,6 +9,7 @@
 #   description: one line under the title
 #   reverb:      listing slug; the link is https://reverb.com/item/<slug>
 #   url:         full link, for items not on Reverb (use instead of reverb)
+#                With neither reverb nor url, the button emails Aaron about the item.
 #   original:    true shows the "Original design" badge (optional)
 #   condition:   kept for reference; not shown on the page (optional)
 #
@@ -81,6 +82,22 @@ sections:
         description: "A hand-finished partscaster with premium parts and a full setup."
         reverb: 91230133-quint-guitars-07-jazzcaster-fiesta-red
         condition: "Brand New"
+
+  - id: amps
+    title: "Amps"
+    blurb: "Two tube combos from my studio."
+    items:
+      - name: "Vox AC30"
+        price: 400
+        photo: vox-ac30
+        tags: ["Tube", "2×12 combo"]
+        description: "The 30-watt British combo behind decades of chime and jangle."
+
+      - name: "Fender Hot Rod Deluxe"
+        price: 300
+        photo: fender-hrd
+        tags: ["Tube", "1×12 combo"]
+        description: "A 40-watt all-tube combo with clean, drive and more-drive channels plus spring reverb."
 
   - id: pedals
     title: "Pedals"

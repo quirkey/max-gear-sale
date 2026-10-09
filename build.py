@@ -1,4 +1,5 @@
 import json, html, os, re, sys
+from urllib.parse import quote
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 os.chdir(HERE)
@@ -15,6 +16,7 @@ except ImportError:
 
 photos = json.load(open('photos.json'))
 R = "https://reverb.com/item/"
+EMAIL = "aaron@quirkey.com"  # for items with no listing link
 
 REQUIRED = ('name', 'price', 'photo', 'tags', 'description')
 OPTIONAL = ('reverb', 'url', 'original', 'condition')
@@ -37,8 +39,8 @@ def load_data():
             for k in it:
                 if k not in REQUIRED + OPTIONAL:
                     errors.append(f"{who}: unknown field '{k}' (typo?)")
-            if bool(it.get('reverb')) == bool(it.get('url')):
-                errors.append(f"{who}: needs either 'reverb' (listing slug) or 'url', not both")
+            if it.get('reverb') and it.get('url'):
+                errors.append(f"{who}: has both 'reverb' and 'url'; keep one")
             if 'photo' in it and it['photo'] not in photos:
                 errors.append(f"{who}: no photo '{it['photo']}' in photos.json")
             if 'price' in it and not isinstance(it['price'], (int, float)):
@@ -74,24 +76,26 @@ count = sum(len(s['items']) for s in sections)
 
 def card(it):
     name = it['name']
-    if it.get('reverb'):
-        href, site = R + it['reverb'], 'Reverb'
-    else:
-        href = it['url']
-        site = re.sub(r'^www\.', '', re.sub(r'^\w+://', '', href).split('/')[0])
     badge = '<span class="badge">Original design</span>' if it.get('original') else ''
+    img = f'<img src="{photos[it['photo']]}" alt="{e(name)}" loading="lazy" width="520" height="520">{badge}'
+    if it.get('reverb') or it.get('url'):
+        href = R + it['reverb'] if it.get('reverb') else it['url']
+        site = 'Reverb' if it.get('reverb') else re.sub(r'^www\.', '', re.sub(r'^\w+://', '', href).split('/')[0])
+        photo = f'<a class="photo" href="{e(href)}" target="_blank" rel="noopener" aria-label="{e(name)} on {e(site)}">{img}</a>'
+        button = f'<a class="buy" href="{e(href)}" target="_blank" rel="noopener">More info on {e(site)} <span aria-hidden="true">&#8599;</span></a>'
+    else:
+        # No listing to link to: the photo isn't a link and the button opens an email about the item.
+        photo = f'<div class="photo">{img}</div>'
+        button = f'<a class="buy" href="mailto:{EMAIL}?subject={quote(name)}">Email me about this</a>'
     tg = ''.join(f'<li>{e(str(t))}</li>' for t in it['tags'])
     return f'''
       <article class="item">
-        <a class="photo" href="{e(href)}" target="_blank" rel="noopener" aria-label="{e(name)} on {e(site)}">
-          <img src="{photos[it['photo']]}" alt="{e(name)}" loading="lazy" width="520" height="520">
-          {badge}
-        </a>
+        {photo}
         <div class="body">
           <div class="row"><h3>{e(name)}</h3><p class="price">${it['price']:,}</p></div>
           <p class="desc">{e(it['description'])}</p>
           <ul class="tags">{tg}</ul>
-          <a class="buy" href="{e(href)}" target="_blank" rel="noopener">More info on {e(site)} <span aria-hidden="true">&#8599;</span></a>
+          {button}
         </div>
       </article>'''
 
