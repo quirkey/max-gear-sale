@@ -22,7 +22,7 @@ SITE = "https://quirkey.github.io/max-gear-sale/"  # live URL; link previews nee
 EMAIL = "aaron@quirkey.com"  # for items with no listing link
 
 REQUIRED = ('name', 'price', 'photo', 'tags', 'description')
-OPTIONAL = ('reverb', 'url', 'original', 'condition')
+OPTIONAL = ('reverb', 'url', 'original', 'condition', 'sold')
 
 def load_data():
     try:
@@ -104,14 +104,21 @@ def fmt_price(p):
     lo, hi = (int(v) for v in str(p).split('-'))
     return f'${lo:,}&ndash;${hi:,}'
 
-total = sum(i['price'] for s in sections for i in s['items']) + sum(x['price'] for s in sections for x in extras(s) if isinstance(x.get('price'), (int, float)))
+total = sum(i['price'] for s in sections for i in s['items'] if not i.get('sold')) + sum(x['price'] for s in sections for x in extras(s) if isinstance(x.get('price'), (int, float)))
 count = sum(len(s['items']) + len(extras(s)) for s in sections)
 
 def card(it):
     name = it['name']
+    sold = bool(it.get('sold'))
     badge = '<span class="badge">Original design</span>' if it.get('original') else ''
+    if sold:
+        badge += '<span class="badge sold-badge">Sold</span>'
     img = f'<img src="{photos[it['photo']]}" alt="{e(name)}" loading="lazy" width="416" height="520">{badge}'
-    if it.get('reverb') or it.get('url'):
+    if sold:
+        # Sold: keep the card for the record, but no links or buy button.
+        photo = f'<div class="photo">{img}</div>'
+        button = '<p class="sold-note">Sold. Thank you!</p>'
+    elif it.get('reverb') or it.get('url'):
         href = R + it['reverb'] if it.get('reverb') else it['url']
         site = 'Reverb' if it.get('reverb') else re.sub(r'^www\.', '', re.sub(r'^\w+://', '', href).split('/')[0])
         photo = f'<a class="photo" href="{e(href)}" target="_blank" rel="noopener" aria-label="{e(name)} on {e(site)}">{img}</a>'
@@ -122,10 +129,10 @@ def card(it):
         button = f'<a class="buy" href="mailto:{EMAIL}?subject={quote(name)}">Email me about this</a>'
     tg = ''.join(f'<li>{e(str(t))}</li>' for t in it['tags'])
     return f'''
-      <article class="item">
+      <article class="item{' sold' if sold else ''}">
         {photo}
         <div class="body">
-          <div class="row"><h3>{e(name)}</h3><p class="price">${it['price']:,}</p></div>
+          <div class="row"><h3>{e(name)}</h3><p class="price">{'<s>' if sold else ''}${it['price']:,}{'</s><span class="visually-hidden"> (sold)</span>' if sold else ''}</p></div>
           <p class="desc">{e(it['description'])}</p>
           <ul class="tags">{tg}</ul>
           {button}

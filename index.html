@@ -100,6 +100,12 @@ h3 { font-family: var(--display); font-weight: 600; font-size: 1.15rem; line-hei
 .tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
 .tags li { font-family: var(--mono); font-size: 11px; letter-spacing: .04em; text-transform: uppercase; padding: 3px 7px; border-radius: 4px; background: var(--chip); color: var(--muted); }
 .tags .cond { background: transparent; border: 1px solid var(--line); color: var(--ink); }
+.sold-badge { left: auto; right: 10px; background: var(--ink); color: var(--bg); }
+.item.sold .photo img { filter: grayscale(.85); opacity: .55; }
+.item.sold:hover .photo img { transform: none; }
+.item.sold h3, .item.sold .price, .item.sold .desc { color: var(--muted); }
+.sold-note { margin: auto 0 0; font-weight: 700; color: var(--muted); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .buy { margin-top: auto; align-self: flex-start; font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--led); padding-bottom: 1px; }
 .buy:hover { color: var(--led); }
 
@@ -159,13 +165,13 @@ footer p { margin: 0; max-width: 60ch; }
           <a class="buy" href="https://reverb.com/item/81891009-quint-guitars-esquire-04-2023-daphne-blue" target="_blank" rel="noopener">More info on Reverb <span aria-hidden="true">&#8599;</span></a>
         </div>
       </article>
-      <article class="item">
-        <a class="photo" href="https://reverb.com/item/91230133-quint-guitars-07-jazzcaster-fiesta-red" target="_blank" rel="noopener" aria-label="Jazzcaster #07, Fiesta Red on Reverb"><img src="img/jazzcaster.jpg?v=45e9303d" alt="Jazzcaster #07, Fiesta Red" loading="lazy" width="416" height="520"></a>
+      <article class="item sold">
+        <div class="photo"><img src="img/jazzcaster.jpg?v=45e9303d" alt="Jazzcaster #07, Fiesta Red" loading="lazy" width="416" height="520"><span class="badge sold-badge">Sold</span></div>
         <div class="body">
-          <div class="row"><h3>Jazzcaster #07, Fiesta Red</h3><p class="price">$825</p></div>
+          <div class="row"><h3>Jazzcaster #07, Fiesta Red</h3><p class="price"><s>$825</s><span class="visually-hidden"> (sold)</span></p></div>
           <p class="desc">A hand-finished partscaster with premium parts and a full setup.</p>
           <ul class="tags"><li>Solid body</li></ul>
-          <a class="buy" href="https://reverb.com/item/91230133-quint-guitars-07-jazzcaster-fiesta-red" target="_blank" rel="noopener">More info on Reverb <span aria-hidden="true">&#8599;</span></a>
+          <p class="sold-note">Sold. Thank you!</p>
         </div>
       </article>
       <article class="item">
@@ -236,13 +242,13 @@ footer p { margin: 0; max-width: 60ch; }
           <a class="buy" href="https://reverb.com/item/99865222-quint-guitars-clone-lab-data-corrupter" target="_blank" rel="noopener">More info on Reverb <span aria-hidden="true">&#8599;</span></a>
         </div>
       </article>
-      <article class="item">
-        <a class="photo" href="https://reverb.com/item/99863494-quint-guitars-clone-lab-riptide" target="_blank" rel="noopener" aria-label="Riptide on Reverb"><img src="img/riptide.jpg?v=e5d6c412" alt="Riptide" loading="lazy" width="416" height="520"></a>
+      <article class="item sold">
+        <div class="photo"><img src="img/riptide.jpg?v=e5d6c412" alt="Riptide" loading="lazy" width="416" height="520"><span class="badge sold-badge">Sold</span></div>
         <div class="body">
-          <div class="row"><h3>Riptide</h3><p class="price">$175</p></div>
+          <div class="row"><h3>Riptide</h3><p class="price"><s>$175</s><span class="visually-hidden"> (sold)</span></p></div>
           <p class="desc">Clone of the Scientific Guitarist Riptide, with a real Accutronics spring tank inside.</p>
           <ul class="tags"><li>Reverb</li></ul>
-          <a class="buy" href="https://reverb.com/item/99863494-quint-guitars-clone-lab-riptide" target="_blank" rel="noopener">More info on Reverb <span aria-hidden="true">&#8599;</span></a>
+          <p class="sold-note">Sold. Thank you!</p>
         </div>
       </article>
       <article class="item">

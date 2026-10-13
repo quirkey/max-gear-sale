@@ -12,6 +12,7 @@
 #                With neither reverb nor url, the button emails Aaron about the item.
 #   original:    true shows the "Original design" badge (optional)
 #   condition:   kept for reference; not shown on the page (optional)
+#   sold:        true marks it sold: greyed out, price struck through, no buy button (optional)
 #
 # Items appear in the order listed. Keep text in quotes.
 
@@ -83,6 +84,7 @@ sections:
         tags: ["Solid body"]
         description: "A hand-finished partscaster with premium parts and a full setup."
         reverb: 91230133-quint-guitars-07-jazzcaster-fiesta-red
+        sold: true
         condition: "Brand New"
 
       - name: "Fender American Performer Strat"
@@ -140,6 +142,7 @@ sections:
         tags: ["Reverb"]
         description: "Clone of the Scientific Guitarist Riptide, with a real Accutronics spring tank inside."
         reverb: 99863494-quint-guitars-clone-lab-riptide
+        sold: true
         condition: "Excellent"
 
       - name: "Organizer"
